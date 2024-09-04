@@ -38,7 +38,7 @@ extension ProductsListViewModel {
 }
 
 extension ProductsListViewModel {
-    struct ProductPresentation: Equatable {
+    struct ProductPresentation: Identifiable, Equatable {
         let id: Int
         let title: String
         let price: String
