@@ -18,8 +18,9 @@ final class ProductsListViewModel {
 
     func handleOnAppearAction() async {
         do {
-            _ = try await productsService.products()
-            contentState = .empty
+            let products = try await productsService.products()
+            let presentations = products.map(ProductPresentation.init)
+            contentState = presentations.isEmpty ? .empty : .products(presentations)
         } catch {
             contentState = .error
         }
@@ -27,9 +28,20 @@ final class ProductsListViewModel {
 }
 
 extension ProductsListViewModel {
-    enum ContentState {
+    enum ContentState: Equatable {
         case loading
         case error
         case empty
+        case products(_ products: [ProductPresentation])
+    }
+}
+
+extension ProductsListViewModel {
+    struct ProductPresentation: Equatable {
+    }
+}
+
+extension ProductsListViewModel.ProductPresentation {
+    init(product: Product) {
     }
 }

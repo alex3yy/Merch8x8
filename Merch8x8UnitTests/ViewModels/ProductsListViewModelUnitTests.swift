@@ -40,8 +40,25 @@ final class ProductsListViewModelUnitTests: XCTestCase {
         XCTAssertEqual(sut.contentState, .empty)
     }
 
+    func test_handleOnAppearAction_requestSucceedsWithOneItemInArray_setsProductsStateWithArray() async {
+        let mockProduct = Product(id: 1, title: "", price: .init(value: 10, currencyCode: "EUR"), category: "", description: "", imageUrlString: "")
+        productsService.mockSuccess(products: [mockProduct])
+        await sut.handleOnAppearAction()
+
+        XCTAssertEqual(sut.contentState.productsPresentations?.count, 1)
+    }
+
     // MARK: - contentState
     func test_contentState_initialized_setsLoadingState() {
         XCTAssertEqual(sut.contentState, .loading)
+    }
+}
+
+extension ProductsListViewModel.ContentState {
+    var productsPresentations: [ProductsListViewModel.ProductPresentation]? {
+        if case let .products(products) = self {
+            return products
+        }
+        return nil
     }
 }
