@@ -190,9 +190,9 @@
 		BAFB471D2C884F35007B2DAE /* Merch8x8UnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				BADA936E2C88C4360091EA91 /* ViewModels */,
 				BAFB472A2C885CC0007B2DAE /* Merch8x8UnitTests.xctestplan */,
 				BAFB47262C884FEB007B2DAE /* Services */,
+				BADA936E2C88C4360091EA91 /* ViewModels */,
 				BAFB47272C885173007B2DAE /* Helpers */,
 			);
 			path = Merch8x8UnitTests;
