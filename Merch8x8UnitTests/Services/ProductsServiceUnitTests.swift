@@ -57,4 +57,14 @@ final class ProductsServiceUnitTests: XCTestCase {
 
         await assertAsyncError(try await sut.products(), throws: ProductsServiceError.self)
     }
+
+    func test_products_decodesEmptyArrayOfDtos_returnsEmptyArrayOfProducts() async throws {
+        let dtos: [ProductDTO] = []
+        let data = try JSONEncoder().encode(dtos)
+        MockURLProtocol.mock(httpStatusCode: 200, data: data)
+
+        let products = try await sut.products()
+
+        XCTAssertTrue(products.isEmpty)
+    }
 }
