@@ -19,6 +19,7 @@
 		BADA93702C88C4560091EA91 /* ProductsListViewModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA936F2C88C4560091EA91 /* ProductsListViewModelUnitTests.swift */; };
 		BADA93742C88D2040091EA91 /* ProductsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA93732C88D2040091EA91 /* ProductsServiceProtocol.swift */; };
 		BADA93772C88D3FF0091EA91 /* MockProductsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA93762C88D3FF0091EA91 /* MockProductsService.swift */; };
+		BADA937B2C88EA510091EA91 /* ProductPresentationUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA937A2C88EA510091EA91 /* ProductPresentationUnitTests.swift */; };
 		BAFB47052C88441A007B2DAE /* Merch8x8App.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFB47042C88441A007B2DAE /* Merch8x8App.swift */; };
 		BAFB47072C88441A007B2DAE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFB47062C88441A007B2DAE /* ContentView.swift */; };
 		BAFB47092C88441C007B2DAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAFB47082C88441C007B2DAE /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		BADA936F2C88C4560091EA91 /* ProductsListViewModelUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListViewModelUnitTests.swift; sourceTree = "<group>"; };
 		BADA93732C88D2040091EA91 /* ProductsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsServiceProtocol.swift; sourceTree = "<group>"; };
 		BADA93762C88D3FF0091EA91 /* MockProductsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProductsService.swift; sourceTree = "<group>"; };
+		BADA937A2C88EA510091EA91 /* ProductPresentationUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPresentationUnitTests.swift; sourceTree = "<group>"; };
 		BAFB47012C88441A007B2DAE /* Merch8x8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Merch8x8.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAFB47042C88441A007B2DAE /* Merch8x8App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merch8x8App.swift; sourceTree = "<group>"; };
 		BAFB47062C88441A007B2DAE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				BADA936F2C88C4560091EA91 /* ProductsListViewModelUnitTests.swift */,
+				BADA937A2C88EA510091EA91 /* ProductPresentationUnitTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				BADA935D2C8884C00091EA91 /* XCTestCase+AssertAsyncError.swift in Sources */,
 				BADA93772C88D3FF0091EA91 /* MockProductsService.swift in Sources */,
 				BAFB471F2C884F35007B2DAE /* ProductsServiceUnitTests.swift in Sources */,
+				BADA937B2C88EA510091EA91 /* ProductPresentationUnitTests.swift in Sources */,
 				BAFB47292C88518B007B2DAE /* XCTestCase+AssertError.swift in Sources */,
 				BADA936A2C88A8D70091EA91 /* ProductsServiceDTOParserUnitTests.swift in Sources */,
 				BADA935B2C88795C0091EA91 /* URLSession+Mocked.swift in Sources */,

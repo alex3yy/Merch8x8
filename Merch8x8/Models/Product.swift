@@ -20,5 +20,10 @@ extension Product {
     struct Price: Equatable {
         let value: Double
         let currencyCode: String
+        var locale: Locale = .current
+
+        var description: String {
+            value.formatted(.currency(code: currencyCode).locale(locale))
+        }
     }
 }

@@ -38,10 +38,22 @@ extension ProductsListViewModel {
 
 extension ProductsListViewModel {
     struct ProductPresentation: Equatable {
+        let id: Int
+        let title: String
+        let price: String
+        let category: String
+        let description: String
+        let imageUrl: URL?
     }
 }
 
 extension ProductsListViewModel.ProductPresentation {
     init(product: Product) {
+        self.id = product.id
+        self.title = product.title
+        self.price = product.price.description
+        self.category = product.category
+        self.description = product.description
+        self.imageUrl = URL(string: product.imageUrlString)
     }
 }
