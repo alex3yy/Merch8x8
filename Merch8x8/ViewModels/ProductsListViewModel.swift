@@ -8,7 +8,7 @@
 import Foundation
 
 final class ProductsListViewModel {
-    private(set) var contentState: ContentState = .loading
+    @Published private(set) var contentState: ContentState = .loading
 
     private let productsService: ProductsServiceProtocol
 
@@ -17,6 +17,7 @@ final class ProductsListViewModel {
     }
 
     func handleOnAppearAction() async {
+        contentState = .loading
         do {
             let products = try await productsService.products()
             let presentations = products.map(ProductPresentation.init)

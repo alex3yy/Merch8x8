@@ -48,6 +48,16 @@ final class ProductsListViewModelUnitTests: XCTestCase {
         XCTAssertEqual(sut.contentState.productsPresentations?.count, 1)
     }
 
+    func test_handleOnAppearAction_retryRequestAfterFailure_setsLoadingState() async {
+        let collector = PublisherValueCollector(publisher: sut.$contentState)
+        productsService.mockFailure()
+        await sut.handleOnAppearAction()
+
+        await sut.handleOnAppearAction()
+
+        XCTAssertEqual(collector.values.suffix(3), [.error, .loading, .error])
+    }
+
     // MARK: - contentState
     func test_contentState_initialized_setsLoadingState() {
         XCTAssertEqual(sut.contentState, .loading)
