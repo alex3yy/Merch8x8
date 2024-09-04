@@ -67,4 +67,16 @@ final class ProductsServiceUnitTests: XCTestCase {
 
         XCTAssertTrue(products.isEmpty)
     }
+
+    func test_products_decodesArrayOfDtos_returnsArrayOfProducts() async throws {
+        let dtos: [ProductDTO] = [
+            ProductDTO(id: 1, title: "Product title", price: 10.99, category: "Some category", description: "A brief description.", image: "https://example.com/image.jpg")
+        ]
+        let data = try JSONEncoder().encode(dtos)
+        MockURLProtocol.mock(httpStatusCode: 200, data: data)
+
+        let products = try await sut.products()
+
+        XCTAssertEqual(1, products.count)
+    }
 }
