@@ -9,6 +9,7 @@ import XCTest
 
 @testable import Merch8x8
 
+@MainActor
 final class ProductsListViewModelUnitTests: XCTestCase {
 
     private var sut: ProductsListViewModel!

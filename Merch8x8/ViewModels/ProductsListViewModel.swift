@@ -7,7 +7,8 @@
 
 import Foundation
 
-final class ProductsListViewModel {
+@MainActor
+final class ProductsListViewModel: ObservableObject {
     @Published private(set) var contentState: ContentState = .loading
 
     private let productsService: ProductsServiceProtocol

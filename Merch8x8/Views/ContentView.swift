@@ -8,17 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @ObservedObject var productListViewModel: ProductsListViewModel
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Group {
+            switch productListViewModel.contentState {
+            case .loading:
+                ProgressView()
+            case .error:
+                Text("An error occurred. Please try again.")
+            case .empty:
+                Text("There are no products yet.")
+            case .products(let products):
+                ProductsListView(products: products)
+            }
         }
-        .padding()
+        .task {
+            await productListViewModel.handleOnAppearAction()
+        }
     }
 }
 
 #Preview {
-    ContentView()
+    let productsService = ProductsService(urlSession: .shared)
+    let productListViewModel = ProductsListViewModel(productsService: productsService)
+
+    return ContentView(productListViewModel: productListViewModel)
 }

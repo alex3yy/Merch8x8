@@ -9,9 +9,20 @@ import SwiftUI
 
 @main
 struct Merch8x8App: App {
+    
+    @StateObject private var productListViewModel: ProductsListViewModel
+
+    init() {
+        let productsService = ProductsService(urlSession: .shared)
+        let productListViewModel = ProductsListViewModel(productsService: productsService)
+        _productListViewModel = StateObject(wrappedValue: productListViewModel)
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(
+                productListViewModel: productListViewModel
+            )
         }
     }
 }
