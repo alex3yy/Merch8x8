@@ -10,8 +10,19 @@ import Foundation
 final class ProductsListViewModel {
     private(set) var contentState: ContentState = .loading
 
-    func handleOnAppearAction() {
-        contentState = .error
+    private let productsService: ProductsServiceProtocol
+
+    init(productsService: ProductsServiceProtocol) {
+        self.productsService = productsService
+    }
+
+    func handleOnAppearAction() async {
+        do {
+            _ = try await productsService.products()
+            contentState = .empty
+        } catch {
+            contentState = .error
+        }
     }
 }
 
@@ -19,5 +30,6 @@ extension ProductsListViewModel {
     enum ContentState {
         case loading
         case error
+        case empty
     }
 }

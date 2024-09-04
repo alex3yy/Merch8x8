@@ -12,10 +12,12 @@ import XCTest
 final class ProductsListViewModelUnitTests: XCTestCase {
 
     private var sut: ProductsListViewModel!
+    private var productsService: MockProductsService!
 
     override func setUp() {
         super.setUp()
-        sut = ProductsListViewModel()
+        productsService = MockProductsService()
+        sut = ProductsListViewModel(productsService: productsService)
     }
 
     override func tearDown() {
@@ -24,12 +26,19 @@ final class ProductsListViewModelUnitTests: XCTestCase {
     }
 
     // MARK: - handleOnAppearAction()
-    func test_handleOnAppearAction_requestFails_setsErrorState() {
-        sut.handleOnAppearAction()
-        
+    func test_handleOnAppearAction_requestFails_setsErrorState() async {
+        productsService.mockFailure()
+        await sut.handleOnAppearAction()
+
         XCTAssertEqual(sut.contentState, .error)
     }
 
+    func test_handleOnAppearAction_requestSucceedsWithEmptyArray_setsEmptyState() async {
+        productsService.mockSuccess(products: [])
+        await sut.handleOnAppearAction()
+
+        XCTAssertEqual(sut.contentState, .empty)
+    }
 
     // MARK: - contentState
     func test_contentState_initialized_setsLoadingState() {

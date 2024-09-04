@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProductsService {
+struct ProductsService: ProductsServiceProtocol {
     
     private let urlSession: URLSession
 
