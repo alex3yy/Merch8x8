@@ -15,7 +15,7 @@ final class ProductsServiceDTOParserUnitTests: XCTestCase {
 
     private let dto = ProductDTO(id: 1, title: "Product title", price: 10.99, category: "Some category", description: "A brief description.", image: "https://example.com/image.jpg")
 
-    override func setUp()  {
+    override func setUp() {
         super.setUp()
         sut = ProductsServiceDTOParser()
     }
@@ -49,5 +49,11 @@ final class ProductsServiceDTOParserUnitTests: XCTestCase {
         let product = sut.parse(dto: dto)
 
         XCTAssertEqual("Some category", product.category)
+    }
+
+    func test_parse_dtoDescription_setsProductWithDescription() {
+        let product = sut.parse(dto: dto)
+
+        XCTAssertEqual("A brief description.", product.description)
     }
 }

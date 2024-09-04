@@ -12,6 +12,7 @@ struct Product {
     let title: String
     let price: Price
     let category: String
+    let description: String
 }
 
 extension Product {
