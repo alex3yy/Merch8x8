@@ -21,7 +21,9 @@ struct ProductsService {
 
         do {
             let (_, response) = try await urlSession.data(from: url)
-            guard let _ = response as? HTTPURLResponse else {
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode)
+            else {
                 throw ProductsServiceError()
             }
         } catch {

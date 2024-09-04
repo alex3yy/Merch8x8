@@ -51,6 +51,18 @@ final class MockURLProtocol: URLProtocol {
         self.response = .failure(error)
     }
 
+    class func mock(httpStatusCode: Int) {
+        validateMock()
+
+        let httpUrlResponse = HTTPURLResponse(
+            url: URL(string: "a_url")!,
+            statusCode: httpStatusCode,
+            httpVersion: nil,
+            headerFields: nil
+        )!
+        self.response = .success(MockURLResponse(urlResponse: httpUrlResponse, data: Data()))
+    }
+
     class func mockSuccessWithCustomHttpUrlResponse() {
         validateMock()
 

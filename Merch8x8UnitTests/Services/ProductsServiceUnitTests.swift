@@ -45,4 +45,10 @@ final class ProductsServiceUnitTests: XCTestCase {
 
         await assertAsyncError(try await sut.products(), throws: ProductsServiceError.self)
     }
+
+    func test_products_responseWithBadStatusCode_throwsError() async {
+        MockURLProtocol.mock(httpStatusCode: 400)
+
+        await assertAsyncError(try await sut.products(), throws: ProductsServiceError.self)
+    }
 }
