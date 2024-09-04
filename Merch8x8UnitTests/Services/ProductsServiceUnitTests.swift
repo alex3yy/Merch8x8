@@ -51,4 +51,10 @@ final class ProductsServiceUnitTests: XCTestCase {
 
         await assertAsyncError(try await sut.products(), throws: ProductsServiceError.self)
     }
+
+    func test_products_dataDecodingFails_throwsError() async {
+        MockURLProtocol.mock(httpStatusCode: 200)
+
+        await assertAsyncError(try await sut.products(), throws: ProductsServiceError.self)
+    }
 }

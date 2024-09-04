@@ -20,8 +20,9 @@ struct ProductsService {
             .appendingPathComponent("products")
 
         do {
-            let (_, response) = try await urlSession.data(from: url)
+            let (data, response) = try await urlSession.data(from: url)
             try response.validateAsSuccessfulHTTPURLResponse()
+            _ = try JSONDecoder().decode([ProductDTO].self, from: data)
         } catch {
             throw ProductsServiceError()
         }
