@@ -51,6 +51,18 @@ final class MockURLProtocol: URLProtocol {
         self.response = .failure(error)
     }
 
+    class func mockSuccessWithCustomHttpUrlResponse() {
+        validateMock()
+
+        let customUrlResponse = CustomURLResponse(
+            url: URL(string: "a_url")!,
+            mimeType: nil,
+            expectedContentLength: 0,
+            textEncodingName: nil
+        )
+        self.response = .success(MockURLResponse(urlResponse: customUrlResponse, data: Data()))
+    }
+
     class func reset() {
         urlRequest = nil
         response = nil
@@ -68,4 +80,14 @@ final class MockURLProtocol: URLProtocol {
 fileprivate struct MockURLResponse {
     let urlResponse: URLResponse
     let data: Data
+}
+
+fileprivate class CustomURLResponse: URLResponse {
+    override init(url URL: URL, mimeType MIMEType: String?, expectedContentLength length: Int, textEncodingName name: String?) {
+        super.init(url: URL, mimeType: MIMEType, expectedContentLength: length, textEncodingName: name)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
 }

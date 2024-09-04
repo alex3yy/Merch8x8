@@ -20,7 +20,10 @@ struct ProductsService {
             .appendingPathComponent("products")
 
         do {
-            _ = try await urlSession.data(from: url)
+            let (_, response) = try await urlSession.data(from: url)
+            guard let _ = response as? HTTPURLResponse else {
+                throw ProductsServiceError()
+            }
         } catch {
             throw ProductsServiceError()
         }

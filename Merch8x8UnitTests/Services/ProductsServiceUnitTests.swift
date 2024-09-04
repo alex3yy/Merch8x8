@@ -39,4 +39,10 @@ final class ProductsServiceUnitTests: XCTestCase {
         let expectedURL = URL(string: "https://fakestoreapi.com/products")
         XCTAssertEqual(expectedURL, MockURLProtocol.urlRequest?.url)
     }
+
+    func test_products_responseWithDifferentUrlResponseType_throwsError() async {
+        MockURLProtocol.mockSuccessWithCustomHttpUrlResponse()
+
+        await assertAsyncError(try await sut.products(), throws: ProductsServiceError.self)
+    }
 }
