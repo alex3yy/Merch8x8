@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "DD515BCD-07D5-4FBA-A8C0-18FDE99AC585",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Merch8x8.xcodeproj",
+      "identifier" : "BAFB47002C88441A007B2DAE",
+      "name" : "Merch8x8"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Merch8x8.xcodeproj",
+        "identifier" : "BAFB471B2C884F35007B2DAE",
+        "name" : "Merch8x8UnitTests"
+      }
+    }
+  ],
+  "version" : 1
+}
