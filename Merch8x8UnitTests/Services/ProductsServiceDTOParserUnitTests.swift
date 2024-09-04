@@ -69,4 +69,13 @@ final class ProductsServiceDTOParserUnitTests: XCTestCase {
 
         XCTAssertEqual([], products)
     }
+
+    func test_parse_arrayOfDtos_setsArrayOfProducts() {
+        let products = sut.parse(dtos: [dto])
+
+        let expectedResult = [
+            Product(id: 1, title: "Product title", price: .init(value: 10.99, currencyCode: "EUR"), category: "Some category", description: "A brief description.", imageUrlString: "https://example.com/image.jpg")
+        ]
+        XCTAssertEqual(expectedResult, products)
+    }
 }

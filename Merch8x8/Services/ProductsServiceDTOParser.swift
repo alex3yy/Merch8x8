@@ -9,7 +9,7 @@ import Foundation
 
 struct ProductsServiceDTOParser {
     func parse(dtos: [ProductDTO]) -> [Product] {
-        []
+        dtos.map(parse(dto:))
     }
 
     func parse(dto: ProductDTO) -> Product {
