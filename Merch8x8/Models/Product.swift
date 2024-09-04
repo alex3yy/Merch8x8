@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Product {
+struct Product: Equatable {
     let id: Int
     let title: String
     let price: Price
@@ -17,7 +17,7 @@ struct Product {
 }
 
 extension Product {
-    struct Price {
+    struct Price: Equatable {
         let value: Double
         let currencyCode: String
     }

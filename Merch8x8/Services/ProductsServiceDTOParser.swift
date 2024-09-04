@@ -8,6 +8,10 @@
 import Foundation
 
 struct ProductsServiceDTOParser {
+    func parse(dtos: [ProductDTO]) -> [Product] {
+        []
+    }
+
     func parse(dto: ProductDTO) -> Product {
         Product(
             id: dto.id,

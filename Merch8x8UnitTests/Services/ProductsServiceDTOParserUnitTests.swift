@@ -62,4 +62,11 @@ final class ProductsServiceDTOParserUnitTests: XCTestCase {
 
         XCTAssertEqual("https://example.com/image.jpg", product.imageUrlString)
     }
+
+    // MARK: - parse(dtos:)
+    func test_parse_emptyArrayOfDtos_setsEmptyArrayOfProducts() {
+        let products = sut.parse(dtos: [])
+
+        XCTAssertEqual([], products)
+    }
 }
