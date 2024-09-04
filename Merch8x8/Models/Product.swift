@@ -10,4 +10,12 @@ import Foundation
 struct Product {
     let id: Int
     let title: String
+    let price: Price
+}
+
+extension Product {
+    struct Price {
+        let value: Double
+        let currencyCode: String
+    }
 }

@@ -37,4 +37,11 @@ final class ProductsServiceDTOParserUnitTests: XCTestCase {
 
         XCTAssertEqual("Product title", product.title)
     }
+
+    func test_parse_dtoPrice_setsProductWithPrice() {
+        let product = sut.parse(dto: dto)
+
+        XCTAssertEqual(10.99, product.price.value)
+        XCTAssertEqual("EUR", product.price.currencyCode)
+    }
 }

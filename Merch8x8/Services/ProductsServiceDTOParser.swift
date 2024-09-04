@@ -11,7 +11,8 @@ struct ProductsServiceDTOParser {
     func parse(dto: ProductDTO) -> Product {
         Product(
             id: dto.id,
-            title: dto.title
+            title: dto.title,
+            price: .init(value: dto.price, currencyCode: "EUR")
         )
     }
 }
