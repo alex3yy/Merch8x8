@@ -9,6 +9,9 @@ import Foundation
 
 struct ProductsServiceDTOParser {
     func parse(dto: ProductDTO) -> Product {
-        Product(id: dto.id)
+        Product(
+            id: dto.id,
+            title: dto.title
+        )
     }
 }

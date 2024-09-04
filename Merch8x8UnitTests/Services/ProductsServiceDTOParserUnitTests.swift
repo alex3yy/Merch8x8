@@ -31,4 +31,10 @@ final class ProductsServiceDTOParserUnitTests: XCTestCase {
 
         XCTAssertEqual(1, product.id)
     }
+
+    func test_parse_dtoTitle_setsProductWithTitle() {
+        let product = sut.parse(dto: dto)
+
+        XCTAssertEqual("Product title", product.title)
+    }
 }
