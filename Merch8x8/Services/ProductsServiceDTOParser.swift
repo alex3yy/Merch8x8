@@ -14,7 +14,8 @@ struct ProductsServiceDTOParser {
             title: dto.title,
             price: .init(value: dto.price, currencyCode: "EUR"),
             category: dto.category,
-            description: dto.description
+            description: dto.description,
+            imageUrlString: dto.image
         )
     }
 }

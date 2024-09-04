@@ -56,4 +56,10 @@ final class ProductsServiceDTOParserUnitTests: XCTestCase {
 
         XCTAssertEqual("A brief description.", product.description)
     }
+
+    func test_parse_dtoImage_setsProductWithImageUrlString() {
+        let product = sut.parse(dto: dto)
+
+        XCTAssertEqual("https://example.com/image.jpg", product.imageUrlString)
+    }
 }
