@@ -8,7 +8,21 @@
 import Foundation
 
 struct ProductsService {
-    func products() throws {
-        throw ProductsServiceError()
+    
+    private let urlSession: URLSession
+
+    init(urlSession: URLSession) {
+        self.urlSession = urlSession
+    }
+
+    func products() async throws {
+        let url = URL(string: "https://fakestoreapi.com")!
+            .appendingPathComponent("products")
+
+        do {
+            _ = try await urlSession.data(from: url)
+        } catch {
+            throw ProductsServiceError()
+        }
     }
 }

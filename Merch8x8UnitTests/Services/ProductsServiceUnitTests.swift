@@ -15,16 +15,28 @@ final class ProductsServiceUnitTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = ProductsService()
+        sut = ProductsService(urlSession: .mocked)
     }
 
     override func tearDown() {
         super.tearDown()
         sut = nil
+        MockURLProtocol.reset()
     }
 
     // MARK: - products()
-    func test_products_hasProductsServiceError_throwsError() {
-        assertError(try sut.products(), throws: ProductsServiceError.self)
+    func test_products_hasProductsServiceError_throwsError() async {
+        MockURLProtocol.mock(error: .init(.badURL))
+
+        await assertAsyncError(try await sut.products(), throws: ProductsServiceError.self)
+    }
+
+    func test_products_requestWithUrl_checkUrlEquality() async {
+        MockURLProtocol.mock(error: .init(.badURL))
+
+        _ = try? await sut.products()
+
+        let expectedURL = URL(string: "https://fakestoreapi.com/products")
+        XCTAssertEqual(expectedURL, MockURLProtocol.urlRequest?.url)
     }
 }
