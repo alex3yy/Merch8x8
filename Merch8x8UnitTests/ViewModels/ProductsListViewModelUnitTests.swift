@@ -23,6 +23,14 @@ final class ProductsListViewModelUnitTests: XCTestCase {
         sut = nil
     }
 
+    // MARK: - handleOnAppearAction()
+    func test_handleOnAppearAction_requestFails_setsErrorState() {
+        sut.handleOnAppearAction()
+        
+        XCTAssertEqual(sut.contentState, .error)
+    }
+
+
     // MARK: - contentState
     func test_contentState_initialized_setsLoadingState() {
         XCTAssertEqual(sut.contentState, .loading)

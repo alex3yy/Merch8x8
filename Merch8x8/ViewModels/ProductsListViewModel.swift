@@ -7,12 +7,17 @@
 
 import Foundation
 
-struct ProductsListViewModel {
-    let contentState: ContentState = .loading
+final class ProductsListViewModel {
+    private(set) var contentState: ContentState = .loading
+
+    func handleOnAppearAction() {
+        contentState = .error
+    }
 }
 
 extension ProductsListViewModel {
     enum ContentState {
         case loading
+        case error
     }
 }
