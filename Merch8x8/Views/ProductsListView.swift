@@ -45,6 +45,7 @@ struct ProductListRow: View {
                 Text(product.title)
                     .fontWeight(.semibold)
                     .font(.callout)
+                    .lineLimit(2)
                 Spacer()
             }
             Spacer(minLength: 6)

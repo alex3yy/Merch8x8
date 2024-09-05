@@ -31,19 +31,28 @@ struct ProductDetailView: View {
                     .font(.title2)
 
                 Text(product.description)
+                    .padding(.bottom, 20)
 
-                VStack {
-                    ForEach(productSuggestions) { product in
-                        NavigationLink {
-                            ProductDetailView(product: product, productSuggestions: [], productDetailViewModel: productDetailViewModel)
-                        } label: {
-                            ProductListRow(product: product)
+                if !productSuggestions.isEmpty {
+                    VStack(alignment: .leading) {
+                        Text("Other suggestions")
+                            .fontWeight(.semibold)
+                            .font(.title3)
+                        ForEach(productSuggestions) { product in
+                            NavigationLink {
+                                ProductDetailView(product: product, productSuggestions: [], productDetailViewModel: productDetailViewModel)
+                            } label: {
+                                ProductListRow(product: product)
+                                    .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain)
                         }
                     }
                 }
             }
             .padding(.horizontal)
         }
+        .navigationBarTitleDisplayMode(.inline)
         .safeAreaInset(edge: .bottom) {
             Button {
                 productDetailViewModel.handleAddToCartAction(productId: product.id)
@@ -73,9 +82,11 @@ struct ProductDetailView: View {
     let cartStore = CartStore(storageService: storageService, productsService: productsService)
     let productDetailViewModel = ProductDetailViewModel(cartStore: cartStore)
 
-    return ProductDetailView(
-        product: product,
-        productSuggestions: productSugesstions,
-        productDetailViewModel: productDetailViewModel
-    )
+    return NavigationView {
+        ProductDetailView(
+            product: product,
+            productSuggestions: productSugesstions,
+            productDetailViewModel: productDetailViewModel
+        )
+    }
 }
