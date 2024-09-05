@@ -12,17 +12,20 @@ struct ContentView: View {
     @ObservedObject var productListViewModel: ProductsListViewModel
 
     var body: some View {
-        Group {
-            switch productListViewModel.contentState {
-            case .loading:
-                ProgressView()
-            case .error:
-                Text("An error occurred. Please try again.")
-            case .empty:
-                Text("There are no products yet.")
-            case .products(let products):
-                ProductsListView(products: products)
+        NavigationView {
+            Group {
+                switch productListViewModel.contentState {
+                case .loading:
+                    ProgressView()
+                case .error:
+                    Text("An error occurred. Please try again.")
+                case .empty:
+                    Text("There are no products yet.")
+                case .products(let products):
+                    ProductsListView(products: products)
+                }
             }
+            .navigationTitle("Shop")
         }
         .task {
             await productListViewModel.handleOnAppearAction()
