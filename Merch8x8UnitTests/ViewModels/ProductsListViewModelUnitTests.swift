@@ -26,35 +26,35 @@ final class ProductsListViewModelUnitTests: XCTestCase {
         sut = nil
     }
 
-    // MARK: - handleOnAppearAction()
-    func test_handleOnAppearAction_requestFails_setsErrorState() async {
+    // MARK: - loadContent()
+    func test_loadContent_requestFails_setsErrorState() async {
         productsService.mockFailure()
-        await sut.handleOnAppearAction()
+        await sut.loadContent()
 
         XCTAssertEqual(sut.contentState, .error)
     }
 
-    func test_handleOnAppearAction_requestSucceedsWithEmptyArray_setsEmptyState() async {
+    func test_loadContent_requestSucceedsWithEmptyArray_setsEmptyState() async {
         productsService.mockSuccess(products: [])
-        await sut.handleOnAppearAction()
+        await sut.loadContent()
 
         XCTAssertEqual(sut.contentState, .empty)
     }
 
-    func test_handleOnAppearAction_requestSucceedsWithOneItemInArray_setsProductsStateWithArray() async {
+    func test_loadContent_requestSucceedsWithOneItemInArray_setsProductsStateWithArray() async {
         let mockProduct = Product(id: 1, title: "", price: .init(value: 10, currencyCode: "EUR"), category: "", description: "", imageUrlString: "")
         productsService.mockSuccess(products: [mockProduct])
-        await sut.handleOnAppearAction()
+        await sut.loadContent()
 
         XCTAssertEqual(sut.contentState.productsPresentations?.count, 1)
     }
 
-    func test_handleOnAppearAction_retryRequestAfterFailure_setsLoadingState() async {
+    func test_loadContent_retryRequestAfterFailure_setsLoadingState() async {
         let collector = PublisherValueCollector(publisher: sut.$contentState)
         productsService.mockFailure()
-        await sut.handleOnAppearAction()
+        await sut.loadContent()
 
-        await sut.handleOnAppearAction()
+        await sut.loadContent()
 
         XCTAssertEqual(collector.values.suffix(3), [.error, .loading, .error])
     }
