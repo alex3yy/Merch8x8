@@ -10,11 +10,20 @@ import SwiftUI
 struct ProductsListView: View {
 
     let products: [ProductsListViewModel.ProductPresentation]
+    let productDetailViewModel: ProductDetailViewModel
 
     var body: some View {
         List(products) { product in
-            ProductListRow(product: product)
-                .frame(height: 60)
+            NavigationLink {
+                ProductDetailView(
+                    product: product,
+                    productSuggestions: Array(products.shuffled().prefix(5)),
+                    productDetailViewModel: productDetailViewModel
+                )
+            } label: {
+                ProductListRow(product: product)
+                    .frame(height: 60)
+            }
         }
     }
 }
@@ -49,6 +58,10 @@ struct ProductListRow: View {
     let products: [ProductsListViewModel.ProductPresentation] = [
         .init(id: 1, title: "Adidas F10", price: "10.99$", category: "Shoes", description: "Some nice shoes.", imageUrl: nil)
     ]
+    let productsService = ProductsService(urlSession: .shared)
+    let storageService = StorageService.shared
+    let cartStore = CartStore(storageService: storageService, productsService: productsService)
+    let productDetailViewModel = ProductDetailViewModel(cartStore: cartStore)
 
-    return ProductsListView(products: products)
+    return ProductsListView(products: products, productDetailViewModel: productDetailViewModel)
 }

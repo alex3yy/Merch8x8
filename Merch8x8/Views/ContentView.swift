@@ -10,6 +10,10 @@ import SwiftUI
 struct ContentView: View {
 
     @ObservedObject var productListViewModel: ProductsListViewModel
+    let cartViewModel: CartViewModel
+    let productDetailViewModel: ProductDetailViewModel
+
+    @State private var isCartPresented: Bool = false
 
     var body: some View {
         NavigationView {
@@ -22,10 +26,20 @@ struct ContentView: View {
                 case .empty:
                     Text("There are no products yet.")
                 case .products(let products):
-                    ProductsListView(products: products)
+                    ProductsListView(products: products, productDetailViewModel: productDetailViewModel)
                 }
             }
             .navigationTitle("Shop")
+            .sheet(isPresented: $isCartPresented) {
+                CartView(cartViewModel: cartViewModel)
+            }
+            .toolbar {
+                ToolbarItem {
+                    Button("Cart") {
+                        isCartPresented = true
+                    }
+                }
+            }
         }
         .task {
             await productListViewModel.handleOnAppearAction()
@@ -35,7 +49,15 @@ struct ContentView: View {
 
 #Preview {
     let productsService = ProductsService(urlSession: .shared)
+    let storageService = StorageService.shared
+    let cartStore = CartStore(storageService: storageService, productsService: productsService)
     let productListViewModel = ProductsListViewModel(productsService: productsService)
+    let cartViewModel = CartViewModel(cartStore: cartStore)
+    let productDetailViewModel = ProductDetailViewModel(cartStore: cartStore)
 
-    return ContentView(productListViewModel: productListViewModel)
+    return ContentView(
+        productListViewModel: productListViewModel,
+        cartViewModel: cartViewModel,
+        productDetailViewModel: productDetailViewModel
+    )
 }

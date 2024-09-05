@@ -32,4 +32,20 @@ struct ProductsService: ProductsServiceProtocol {
             throw ProductsServiceError()
         }
     }
+
+    func product(id: Int) async throws -> Product {
+        let url = URL(string: "https://fakestoreapi.com")!
+            .appendingPathComponent("products")
+            .appendingPathComponent("\(id)")
+
+        do {
+            let (data, response) = try await urlSession.data(from: url)
+            try response.validateAsSuccessfulHTTPURLResponse()
+            let dto = try JSONDecoder().decode(ProductDTO.self, from: data)
+            let product = parser.parse(dto: dto)
+            return product
+        } catch {
+            throw ProductsServiceError()
+        }
+    }
 }
