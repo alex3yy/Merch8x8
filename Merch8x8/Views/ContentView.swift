@@ -22,7 +22,14 @@ struct ContentView: View {
                 case .loading:
                     ProgressView()
                 case .error:
-                    Text("An error occurred. Please try again.")
+                    VStack {
+                        Text("An error occurred. Please try again.")
+                        Button("Refresh") {
+                            Task {
+                                await productListViewModel.loadContent()
+                            }
+                        }
+                    }
                 case .empty:
                     Text("There are no products yet.")
                 case .products(let products):
@@ -42,7 +49,7 @@ struct ContentView: View {
             }
         }
         .task {
-            await productListViewModel.handleOnAppearAction()
+            await productListViewModel.loadContent()
         }
     }
 }

@@ -17,7 +17,7 @@ final class ProductsListViewModel: ObservableObject {
         self.productsService = productsService
     }
 
-    func handleOnAppearAction() async {
+    func loadContent() async {
         contentState = .loading
         do {
             let products = try await productsService.products()
